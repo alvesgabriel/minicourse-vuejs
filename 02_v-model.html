@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form with v-model</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+        <label for="name" v-bind:title="nm_info">Name</label>
+        <input id="name" type="text" v-model.trim="nm" v-bind:title="nm_info" />
+        <br />
+        `{{ nm }}`, {{ type(nm) }}
+        <hr />
+
+        <label for="age" v-bind:title="ag_info">Age</label>
+        <input id="age" type="text" v-model.trim.number="ag" v-bind:title="ag_info" />
+        <br />
+        `{{ ag }}`, {{ type(ag) }}
+        <hr />
+
+        <label for="message" v-bind:title="msg_info">Message</label>
+        <textarea id="message" v-model.lazy.trim="msg" v-bind:title="msg_info"></textarea><br />
+        `{{ msg }}`, {{ type(msg) }}
+        <hr />
+
+        <label for="male">Male</label>
+        <input
+          name="gender"
+          id="male"
+          type="radio"
+          value="male"
+          v-model="gdr"
+        />
+        <br />
+        <label for="female">Female</label>
+        <input
+          name="gender"
+          id="female"
+          type="radio"
+          value="female"
+          v-model="gdr"
+        />
+        <br />
+        <label for="other">Other</label>
+        <input
+          name="gender"
+          id="other"
+          type="radio"
+          value="other"
+          v-model="gdr"
+        />
+        <br />
+        {{ gdr }}, {{ type(gdr) }}
+        <hr />
+
+        <label for="languages" v-bind:title="lang_info">Languages</label>
+        <select v-model="lang" v-bind:title="lang_info">
+          <option value="python">Python</option>
+          <option value="elixir">Elixir</option>
+          <option value="javascript">JavaScript</option>
+          <option value="go">Go</option>
+          <option value="node">Node</option>
+        </select>
+        <br />
+        {{ lang }}, {{ type(lang) }}
+        <hr />
+
+        <input id="agree" type="checkbox" v-model="accept" />
+        <label for="agree">I agree</label><br />
+        {{ accept }}, {{ type(accept) }}
+      </form>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          nm: null,
+          ag: null,
+          msg: null,
+          gdr: null,
+          lang: "python",
+          accept: null,
+          nm_info: "Enter with your name",
+          ag_info: "Enter with your age",
+          msg_info: "Put here your message",
+          lang_info: "Choice your program language",
+        },
+        methods: {
+          type: function (value) {
+            return typeof value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
