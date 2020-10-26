@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My first Vue app</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="click()">Button</button>
+      <select v-on:click="select($event)">
+        <option value="python">Python</option>
+        <option value="elixir">Elixir</option>
+        <option value="javascript">JavaScript</option>
+        <option value="go">Go</option>
+        <option value="node">Node</option>
+      </select>
+      <br />
+      <hr />
+      <textarea v-bind:value="action"></textarea>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          action: "What will be happen?",
+        },
+        methods: {
+          click: function () {
+            this.action = "Button was clicked";
+          },
+          select: function (evt) {
+            this.action = `${evt.target.value} was selected`;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
