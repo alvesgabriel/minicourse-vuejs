@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO-DO list</title>
+
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <style type="text/css">
+    .mark_did {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container" style="padding: 20px">
+    <div class="field">
+      <label for="name" class="label">Name</label>
+      <div>
+        <input class="input" type="text" placeholder="Text input" v-model="newtask" @keyup.enter="add(newtask)">
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>To-do</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="todo in todos">
+          <td><input type="checkbox" v-model="todo.did"></td>
+          <td :class="{mark_did: todo.did}">{{todo.task}}</td>
+          <td>
+            <a @click="remove(todo)"><span class="icon has-text-info"><i class="fa fa-trash-o"></i></span></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        newtask: "",
+        todos: [
+          { task: "To wash the clothes", did: false },
+          { task: "To change baby diaper", did: true },
+          { task: "To walk with dog", did: false },
+        ],
+      },
+      methods: {
+        remove: function (todo) {
+          var index = this.todos.indexOf(todo);
+          this.todos.splice(index, 1);
+        },
+        add: function (newtask) {
+          this.todos.push({
+            task: newtask,
+            did: false,
+          });
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>
