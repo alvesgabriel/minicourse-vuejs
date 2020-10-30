@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conditionals</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <style type="text/css">
+    .little-border {
+      border: solid;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .icon {
+      height: 30px;
+      width: 30px;
+    }
+  </style>
+  <div id="app">
+    <input type="checkbox" v-model="vif">v-if</input><br>
+    <input type="checkbox" v-model="vshow">v-show</input><br>
+    <input type="checkbox" v-model="vborder">border</input><br>
+    <input type="checkbox" v-model="vcolor">color</input><br>
+    <span v-if="vif" :class="{'little-border': vborder, red: vcolor}">Show v-if</span><br>
+    <span v-show="vshow">Show v-show</span><br>
+    <img src="vue-logo.png" :class="{icon: true}" :style="{transform: 'rotate('+degrees+'deg)'}">
+    <button v-on:click="turn()">Turn the Img</button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        vif: false,
+        vshow: false,
+        vborder: false,
+        vcolor: false,
+        degrees: 45,
+      },
+      methods: {
+        turn: function () {
+          self = this
+          setInterval(function () {
+            self.degrees++;
+          }, 10);
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>
