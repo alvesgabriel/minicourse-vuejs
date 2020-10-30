@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO-DO list</title>
+
+  <script src="vue.js"></script>
+  <link rel="stylesheet" href="bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <style type="text/css">
+    .mark_did {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container" style="padding: 20px">
+    <div class="field">
+      <label class="label">Github Username</label>
+      <div>
+        <input class="input" type="text" placeholder="Github Username" v-model="username"
+          @keyup.enter="get_repos(username)">
+      </div>
+    </div>
+    <div class="control">
+      <label class="label">Select repository</label>
+      <div class="select" :class="{'is-loading': loading_repos}">
+        <select v-model="selected_repo" @change="get_issues()">
+          <option v-for="repo in repos">{{repo.name}}</option>
+        </select>
+      </div>
+    </div>
+    <todo-table :todos="todos"></todo-table>
+  </div>
+
+  <script src="axios.min.js"></script>
+
+  <script src="./TODOTable.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        username: "",
+        todos: [],
+        repos: [],
+        selected_repo: null,
+        loading_repos: false,
+      },
+      methods: {
+        get_repos: function (username) {
+          var self = this;
+          self.loading_repos = true;
+          var url = `https://api.github.com/users/${this.username}/repos`
+          axios.get(url).then(function (result) {
+            self.repos = result.data;
+            self.loading_repos = false;
+          });
+        },
+        get_issues: function () {
+          var self = this;
+          var url = `https://api.github.com/repos/${self.username}/${self.selected_repo}/issues`
+          axios.get(url).then(function (result) {
+            var issues = result.data;
+            self.todos = issues.map(function (issue) {
+              return { task: issue.title, did: false };
+            });
+          });
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
