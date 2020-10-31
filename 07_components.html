@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <style type="text/css">
-    .mark_did {
+    .mark_done {
       text-decoration: line-through;
     }
   </style>
@@ -34,16 +34,16 @@
       data: {
         newtask: "",
         todos: [
-          { task: "To wash the clothes", did: false },
-          { task: "To change baby diaper", did: true },
-          { task: "To walk with dog", did: false },
+          { task: "To wash the clothes", done: false },
+          { task: "To change baby diaper", done: true },
+          { task: "To walk with dog", done: false },
         ],
       },
       methods: {
         add: function (newtask) {
           this.todos.push({
             task: newtask,
-            did: false,
+            done: false,
           });
         },
       },

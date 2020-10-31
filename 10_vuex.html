@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My first Vue app</title>
+  <script src="vue.js"></script>
+  <script src="vuex.min.js"></script>
+</head>
+
+<body>
+  <div id="app" v-bind:title="title">
+    <button @click="increase()">{{ count }}</button>
+  </div>
+
+  <div id="app-2">
+    <span v-bind:title="message">
+      Hover your mouse over me for a few seconds to see my dynamically bound
+      title!
+    </span>
+  </div>
+
+  <script src="store.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!",
+        title: "You passa the mouse in 'Hello Vue!'",
+      },
+      methods: {
+        increase: function () {
+          this.$store.commit('increment');
+        },
+      },
+      computed: {
+        count: function () {
+          return this.$store.state.count;
+        },
+      },
+      store: window.STORE,
+    });
+    var app2 = new Vue({
+      el: "#app-2",
+      data: {
+        message: "You loaded this page on " + new Date().toLocaleString(),
+      },
+    });
+  </script>
+</body>
+
+</html>
