@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <style type="text/css">
-    .mark_did {
+    .mark_done {
       text-decoration: line-through;
     }
   </style>
@@ -34,8 +34,8 @@
       </thead>
       <tbody>
         <tr v-for="todo in todos">
-          <td><input type="checkbox" v-model="todo.did"></td>
-          <td :class="{mark_did: todo.did}">{{todo.task}}</td>
+          <td><input type="checkbox" v-model="todo.done"></td>
+          <td :class="{mark_done: todo.done}">{{todo.task}}</td>
           <td>
             <a @click="remove(todo)"><span class="icon has-text-info"><i class="fa fa-trash-o"></i></span></a>
           </td>
@@ -49,9 +49,9 @@
       data: {
         newtask: "",
         todos: [
-          { task: "To wash the clothes", did: false },
-          { task: "To change baby diaper", did: true },
-          { task: "To walk with dog", did: false },
+          { task: "To wash the clothes", done: false },
+          { task: "To change baby diaper", done: true },
+          { task: "To walk with dog", done: false },
         ],
       },
       methods: {
@@ -62,7 +62,7 @@
         add: function (newtask) {
           this.todos.push({
             task: newtask,
-            did: false,
+            done: false,
           });
         },
       },

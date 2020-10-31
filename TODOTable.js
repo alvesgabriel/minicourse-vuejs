@@ -20,8 +20,8 @@ Vue.component("todo-table", {
       </thead>
       <tbody>
         <tr v-for="todo in todos">
-            <td><input type="checkbox" v-model="todo.did"></td>
-            <td :class="{mark_did: todo.did}">{{todo.task}}</td>
+            <td><input type="checkbox" v-model="todo.done"></td>
+            <td :class="{mark_done: todo.done}">{{todo.task}}</td>
             <td>
             <a @click="remove(todo)"><span class="icon has-text-info"><i class="fa fa-trash-o"></i></span></a>
             </td>
